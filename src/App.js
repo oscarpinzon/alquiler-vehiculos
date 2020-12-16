@@ -28,18 +28,24 @@ const carros = [
   },
 ];
 
+const Carro = ({ carro }) => {
+  return (
+    <div key={carro.id}>
+      <p>Precio por dia: {carro.precioPorDia}</p>
+      <p>Nombre: {carro.nombre}</p>
+      <p>Pasajeros: {carro.pasajeros}</p>
+      <p>Puertas: {carro.puertas}</p>
+      <p>Transmision: {carro.transmision}</p>
+    </div>
+  );
+};
+
 const App = () => {
   return (
     <div>
       <h1>Carros</h1>
       {carros.map((carro) => (
-        <div key={carro.id}>
-          <p>Precio por dia: {carro.precioPorDia}</p>
-          <p>Nombre: {carro.nombre}</p>
-          <p>Pasajeros: {carro.pasajeros}</p>
-          <p>Puertas: {carro.puertas}</p>
-          <p>Transmision: {carro.transmision}</p>
-        </div>
+        <Carro key={carro.id} carro={carro} />
       ))}
     </div>
   );
