@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Carro from "./components/Carro";
 
 const carros = [
   {
@@ -27,18 +28,6 @@ const carros = [
     transmision: "Automatica",
   },
 ];
-
-const Carro = ({ carro }) => {
-  return (
-    <div key={carro.id}>
-      <p>Precio por dia: {carro.precioPorDia}</p>
-      <p>Nombre: {carro.nombre}</p>
-      <p>Pasajeros: {carro.pasajeros}</p>
-      <p>Puertas: {carro.puertas}</p>
-      <p>Transmision: {carro.transmision}</p>
-    </div>
-  );
-};
 
 const App = () => {
   return (
