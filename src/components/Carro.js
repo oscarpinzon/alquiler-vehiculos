@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
-const Carro = ({ carro }) => {
+const Carro = ({ carro, handleSelected }) => {
   return (
     <div key={carro.id} className="col-md-4 text-center my-2">
       <Card className="bg-light">
@@ -16,9 +17,12 @@ const Carro = ({ carro }) => {
           <p>Pasajeros: {carro.pasajeros}</p>
           <p>Puertas: {carro.puertas}</p>
           <p>Transmision: {carro.transmision}</p>
-          <a href="#" className="btn btn-primary">
+          <Button
+            onClick={handleSelected(carro.id)}
+            className="btn btn-primary"
+          >
             Rentar
-          </a>
+          </Button>
         </div>
       </Card>
     </div>
