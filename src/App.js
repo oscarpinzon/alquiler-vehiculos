@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Table from "react-bootstrap/Table";
 // Componentes
 import Carro from "./components/Carro";
 import Formulario from "./components/Formulario";
@@ -114,12 +115,15 @@ const App = () => {
     false
   );
   const [alquilerValido, setAlquilerValido] = useState(false);
+  const [historial, setHistorial] = useState([]);
 
   const handleFormularioClose = () => setShowFormulario(false);
 
   const handleAlquileresClose = () => setShowHistorial(false);
 
-  const handleMostrarHistorial = () => setShowHistorial(true);
+  const handleMostrarHistorial = () => {
+    setShowHistorial(true);
+  };
 
   const handleSelected = (id) => () => {
     const carroSeleccionado = carros.find((carro) => carro.id === id);
@@ -157,6 +161,14 @@ const App = () => {
             carro.id === selected.id ? { ...carro, ...nuevoCarro } : carro
           )
         );
+        const registroHistorial = {
+          id: selected.id,
+          nombre: selected.nombre,
+          costo: selected.precioPorDia * diasRenta,
+          fechaInicio: fechaInicioRenta,
+          fechaFin: fechaFinRenta,
+        };
+        setHistorial(historial.concat(registroHistorial));
         setAlquilerValido(true);
         setMostrarResultadoAlquiler(true);
       } else {
@@ -210,7 +222,7 @@ const App = () => {
         <p>No pudimos completar su reserva del {selected.nombre}</p>
         <p>
           Para las fechas del {fechaInicioRenta} al {fechaFinRenta} este carro
-          se encuentra
+          se encuentra alquilado.
         </p>
       </Alert>
     );
@@ -277,10 +289,34 @@ const App = () => {
           <Modal.Title>Historial de Alquiler</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Aqui estara el historial de renta</p>
-          {/*TODO: Create state to manage all successful rentals
-          TODO: Show all rentals inside this modal
-          TODO: make it like a little report or something*/}
+          {historial.length > 0 ? (
+            <Table className="table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Carro</th>
+                  <th scope="col">Inicio del Alquiler</th>
+                  <th scope="col">Fin del Alquiler</th>
+                  <th scope="col">Costo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {historial.map((alquiler, indice) => {
+                  return (
+                    <tr key={indice}>
+                      <th scope="row">{alquiler.nombre}</th>
+                      <td>{alquiler.fechaInicio}</td>
+                      <td>{alquiler.fechaFin}</td>
+                      <td>${alquiler.costo}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          ) : (
+            <Alert className="alert-info">
+              Intenta alquilar algun vehiculo.
+            </Alert>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleAlquileresClose}>
