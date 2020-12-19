@@ -16,7 +16,7 @@ const Carro = ({ carro, handleSelected }) => {
           <p>Precio por dia: ${carro.precioPorDia}</p>
           <p>Pasajeros: {carro.pasajeros}</p>
           <p>Puertas: {carro.puertas}</p>
-          <p>Transmision: {carro.transmision}</p>
+          <p>Transmisión: {carro.transmision}</p>
           <Button
             onClick={handleSelected(carro.id)}
             className="btn btn-primary"

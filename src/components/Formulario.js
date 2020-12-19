@@ -17,7 +17,7 @@ const Formulario = ({
       <p>Precio por dia: ${selected.precioPorDia}</p>
       <p>Pasajeros: {selected.pasajeros}</p>
       <p>Puertas: {selected.puertas}</p>
-      <p>Transmision: {selected.transmision}</p>
+      <p>Transmisión: {selected.transmision}</p>
       <form>
         <label>
           Inicio de la renta:
@@ -39,7 +39,7 @@ const Formulario = ({
             required
           ></input>
         </label>
-        <p>Dias de renta: {diasRenta}</p>
+        <p>Días de renta: {diasRenta}</p>
         <p>Costo de renta: ${diasRenta * selected.precioPorDia}</p>
         <Button variant="primary" onClick={handleIntentoAlquiler}>
           Rentar

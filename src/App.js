@@ -207,7 +207,7 @@ const App = () => {
   if (alquilerValido) {
     resultadoAlquiler = (
       <Alert className="alert-success" role="alert">
-        <Alert.Heading>Su reserva fue exitosa!</Alert.Heading>
+        <Alert.Heading>¡Su reserva fue exitosa!</Alert.Heading>
         <p>Su reserva del {selected.nombre} ha sido completada.</p>
         <p>
           Fechas de reserva: {fechaInicioRenta} al {fechaFinRenta}
@@ -231,7 +231,7 @@ const App = () => {
   return (
     <>
       <Container>
-        <h1 className="header">Alquiler de Vehiculos</h1>
+        <h1 className="header">Alquiler de Vehículos</h1>
         <Row className="justify-content-center">
           <Button onClick={handleMostrarHistorial} className="text-center">
             Mostrar Historial
@@ -314,7 +314,7 @@ const App = () => {
             </Table>
           ) : (
             <Alert className="alert-info">
-              Intenta alquilar algun vehiculo.
+              Intenta alquilar algún vehículo.
             </Alert>
           )}
         </Modal.Body>
