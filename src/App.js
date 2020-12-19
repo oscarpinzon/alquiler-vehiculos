@@ -109,7 +109,10 @@ const App = () => {
   const [fechaInicioRenta, setFechaInicioRenta] = useState(fechaHoy);
   const [fechaFinRenta, setFechaFinRenta] = useState(fechaHoy);
   const [diasRenta, setDiasRenta] = useState(1);
-  const [confirmacionAlquiler, setConfirmacionAlquiler] = useState(false);
+  const [mostrarResultadoAlquiler, setMostrarResultadoAlquiler] = useState(
+    false
+  );
+  const [alquilerValido, setAlquilerValido] = useState(false);
 
   const handleClose = () => setModal(false);
 
@@ -119,7 +122,7 @@ const App = () => {
     setFechaFinRenta(fechaHoy);
     setDiasRenta(diasMinimoRenta);
     setSelected(carroSeleccionado);
-    setConfirmacionAlquiler(false);
+    setMostrarResultadoAlquiler(false);
     setModal(true);
   };
 
@@ -149,16 +152,15 @@ const App = () => {
             carro.id === selected.id ? { ...carro, ...nuevoCarro } : carro
           )
         );
-        setConfirmacionAlquiler(true);
+        setAlquilerValido(true);
+        setMostrarResultadoAlquiler(true);
       } else {
-        // TODO: Mostrar mensaje de error
-        console.log("fechas no validas / ya esta alquilado");
-        setConfirmacionAlquiler(false);
+        setAlquilerValido(false);
+        setMostrarResultadoAlquiler(true);
       }
     } else {
-      // TODO: Mostrar mensaje de error
-      console.log("fechas no validas / date input");
-      setConfirmacionAlquiler(false);
+      setAlquilerValido(false);
+      setMostrarResultadoAlquiler(true);
     }
   };
 
@@ -184,6 +186,31 @@ const App = () => {
     }
   };
 
+  let resultadoAlquiler;
+  if (alquilerValido) {
+    resultadoAlquiler = (
+      <Alert className="alert-success" role="alert">
+        <Alert.Heading>Su reserva fue exitosa!</Alert.Heading>
+        <p>Su reserva del {selected.nombre} ha sido completada.</p>
+        <p>
+          Fechas de reserva: {fechaInicioRenta} al {fechaFinRenta}
+        </p>
+        <p>Costo total: ${selected.precioPorDia * diasRenta}</p>
+      </Alert>
+    );
+  } else {
+    resultadoAlquiler = (
+      <Alert className="alert-danger" role="alert">
+        <Alert.Heading>Hubo un problema en su reserva</Alert.Heading>
+        <p>No pudimos completar su reserva del {selected.nombre}</p>
+        <p>
+          Para las fechas del {fechaInicioRenta} al {fechaFinRenta} este carro
+          se encuentra alquilado.
+        </p>
+      </Alert>
+    );
+  }
+
   return (
     <>
       <Container>
@@ -204,15 +231,8 @@ const App = () => {
           <Modal.Title>Rentar {selected.nombre}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {confirmacionAlquiler ? (
-            <Alert className="alert-success" role="alert">
-              <Alert.Heading>Su reserva fue exitosa!</Alert.Heading>
-              <p>Su reserva del {selected.nombre} ha sido completada.</p>
-              <p>
-                Fechas de reserva: {fechaInicioRenta} al {fechaFinRenta}
-              </p>
-              <p>Costo total: ${selected.precioPorDia * diasRenta}</p>
-            </Alert>
+          {mostrarResultadoAlquiler ? (
+            resultadoAlquiler
           ) : (
             <Formulario
               selected={selected}
