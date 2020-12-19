@@ -103,7 +103,8 @@ function getFechasIntermedias(start, end) {
 }
 
 const App = () => {
-  const [showModal, setModal] = useState(false);
+  const [showFormulario, setShowFormulario] = useState(false);
+  const [showHistorial, setShowHistorial] = useState(false);
   const [selected, setSelected] = useState(testCarros[0]);
   const [carros, setCarros] = useState(testCarros);
   const [fechaInicioRenta, setFechaInicioRenta] = useState(fechaHoy);
@@ -114,7 +115,11 @@ const App = () => {
   );
   const [alquilerValido, setAlquilerValido] = useState(false);
 
-  const handleClose = () => setModal(false);
+  const handleFormularioClose = () => setShowFormulario(false);
+
+  const handleAlquileresClose = () => setShowHistorial(false);
+
+  const handleMostrarHistorial = () => setShowHistorial(true);
 
   const handleSelected = (id) => () => {
     const carroSeleccionado = carros.find((carro) => carro.id === id);
@@ -123,7 +128,7 @@ const App = () => {
     setDiasRenta(diasMinimoRenta);
     setSelected(carroSeleccionado);
     setMostrarResultadoAlquiler(false);
-    setModal(true);
+    setShowFormulario(true);
   };
 
   const handleIntentoAlquiler = () => {
@@ -205,7 +210,7 @@ const App = () => {
         <p>No pudimos completar su reserva del {selected.nombre}</p>
         <p>
           Para las fechas del {fechaInicioRenta} al {fechaFinRenta} este carro
-          se encuentra alquilado.
+          se encuentra
         </p>
       </Alert>
     );
@@ -215,6 +220,12 @@ const App = () => {
     <>
       <Container>
         <h1 className="header">Alquiler de Vehiculos</h1>
+        <Row className="justify-content-center">
+          <Button onClick={handleMostrarHistorial} className="text-center">
+            Mostrar Historial
+          </Button>
+        </Row>
+
         <Row>
           {carros.map((carro) => (
             <Carro
@@ -226,7 +237,11 @@ const App = () => {
         </Row>
       </Container>
 
-      <Modal show={showModal} onHide={handleClose} className="rent-modal">
+      <Modal
+        show={showFormulario}
+        onHide={handleFormularioClose}
+        className="rent-modal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Rentar {selected.nombre}</Modal.Title>
         </Modal.Header>
@@ -247,7 +262,28 @@ const App = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleFormularioClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showHistorial}
+        onHide={handleAlquileresClose}
+        className="rent-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Historial de Alquiler</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Aqui estara el historial de renta</p>
+          {/*TODO: Create state to manage all successful rentals
+          TODO: Show all rentals inside this modal
+          TODO: make it like a little report or something*/}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleAlquileresClose}>
             Close
           </Button>
         </Modal.Footer>
