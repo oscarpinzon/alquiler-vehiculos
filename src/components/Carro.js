@@ -21,7 +21,7 @@ const Carro = ({ carro, handleSelected }) => {
             onClick={handleSelected(carro.id)}
             className="btn btn-primary"
           >
-            Rentar
+            Alquilar
           </Button>
         </div>
       </Card>
