@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/alquiler-vehiculos/static/css/main.670c8a9b.chunk.css",
+    "main.js": "/alquiler-vehiculos/static/js/main.2d6184e5.chunk.js",
+    "main.js.map": "/alquiler-vehiculos/static/js/main.2d6184e5.chunk.js.map",
+    "runtime-main.js": "/alquiler-vehiculos/static/js/runtime-main.99c0f1c6.js",
+    "runtime-main.js.map": "/alquiler-vehiculos/static/js/runtime-main.99c0f1c6.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/alquiler-vehiculos/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.f55dbe34.chunk.js": "/alquiler-vehiculos/static/js/2.f55dbe34.chunk.js",
+    "static/js/2.f55dbe34.chunk.js.map": "/alquiler-vehiculos/static/js/2.f55dbe34.chunk.js.map",
+    "index.html": "/alquiler-vehiculos/index.html",
+    "static/css/2.1a02f21c.chunk.css.map": "/alquiler-vehiculos/static/css/2.1a02f21c.chunk.css.map",
+    "static/css/main.670c8a9b.chunk.css.map": "/alquiler-vehiculos/static/css/main.670c8a9b.chunk.css.map",
+    "static/js/2.f55dbe34.chunk.js.LICENSE.txt": "/alquiler-vehiculos/static/js/2.f55dbe34.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.99c0f1c6.js",
+    "static/css/2.1a02f21c.chunk.css",
+    "static/js/2.f55dbe34.chunk.js",
+    "static/css/main.670c8a9b.chunk.css",
+    "static/js/main.2d6184e5.chunk.js"
+  ]
+}
