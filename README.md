@@ -17,6 +17,8 @@ Cualquier funcionalidad relacionada al backend esta pendiente.
 
 ## Instrucciones de instalación y configuración
 
+Puedes ver este proyecto en accion en este link: (https://oscarpinzon.github.io/alquiler-vehiculos/)
+
 Clona este repositorio. Necesitas `node` y `npm` instalados de forma global en tu maquina.
 
 Instalación:
