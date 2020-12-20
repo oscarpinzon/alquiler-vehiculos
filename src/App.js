@@ -12,6 +12,7 @@ import Table from "react-bootstrap/Table";
 import Carro from "./components/Carro";
 import Formulario from "./components/Formulario";
 
+// Carros para probar la funcionalidad
 const testCarros = [
   {
     id: 1,
@@ -81,6 +82,7 @@ const msPorDia = 1000 * 60 * 60 * 24;
 
 const diasMinimoRenta = 1;
 
+// Retorna la cantidad de días de diferencia en entre 2 días
 function difEnDias(a, b) {
   // Descarta la informacion de zona horaria y de tiempo.
   const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
@@ -89,6 +91,7 @@ function difEnDias(a, b) {
   return Math.floor((utc2 - utc1) / msPorDia);
 }
 
+//Retorna un arreglo con todas las fechas que existen entre 2 fechas proporcionadas
 function getFechasIntermedias(start, end) {
   const startDate = new Date(start);
   const endDate = new Date(end);
@@ -125,6 +128,7 @@ const App = () => {
     setShowHistorial(true);
   };
 
+  // Método que se encarga de gestionar la lógica de cuando se hace click sobre el botón de alquilar
   const handleSelected = (id) => () => {
     const carroSeleccionado = carros.find((carro) => carro.id === id);
     setFechaInicioRenta(fechaHoy);
@@ -135,6 +139,7 @@ const App = () => {
     setShowFormulario(true);
   };
 
+  // Método que gestiona un intento de alquiler
   const handleIntentoAlquiler = () => {
     const fechasSonValidas =
       new Date(fechaInicioRenta) <= new Date(fechaFinRenta);
@@ -146,7 +151,7 @@ const App = () => {
       );
 
       let alquilerLibre = true;
-
+      // Revisa que no este previamente alquilado para el rango de fechas del alquiler solicitado
       for (const fecha of fechasAlquiladas) {
         if (selected.fechasRentadas.includes(fecha)) {
           alquilerLibre = false;
@@ -181,6 +186,7 @@ const App = () => {
     }
   };
 
+  // Controla el input de fechas del formulario de alquiler para la fecha de inicio de alquiler
   const handleFechaInicioRenta = (event) => {
     const fechaInicio = new Date(event.target.value);
     const fechaFin = new Date(fechaFinRenta);
@@ -192,6 +198,7 @@ const App = () => {
     }
   };
 
+  // Controla el input de fechas del formulario de alquiler para la fecha final de alquiler
   const handleFechaFinRenta = (event) => {
     const fechaInicio = new Date(fechaInicioRenta);
     const fechaFin = new Date(event.target.value);
@@ -203,6 +210,7 @@ const App = () => {
     }
   };
 
+  // Muestra el mensaje correcto, dependiendo del resultado del intento de alquiler
   let resultadoAlquiler;
   if (alquilerValido) {
     resultadoAlquiler = (
@@ -230,6 +238,7 @@ const App = () => {
 
   return (
     <>
+      {/* Contiene el catalogo de carros*/}
       <Container>
         <h1 className="header">Alquiler de Vehículos</h1>
         <Row className="justify-content-center">
@@ -249,13 +258,14 @@ const App = () => {
         </Row>
       </Container>
 
+      {/* Modal responsable del formulario de alquiler*/}
       <Modal
         show={showFormulario}
         onHide={handleFormularioClose}
         className="rent-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Rentar {selected.nombre}</Modal.Title>
+          <Modal.Title>Alquilar {selected.nombre}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {mostrarResultadoAlquiler ? (
@@ -280,6 +290,7 @@ const App = () => {
         </Modal.Footer>
       </Modal>
 
+      {/* Modal responsable del historial de alquileres*/}
       <Modal
         show={showHistorial}
         onHide={handleAlquileresClose}
